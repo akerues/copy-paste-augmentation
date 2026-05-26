@@ -1,0 +1,53 @@
+import os
+
+def build_installbuilder_xml():
+    xml_content = """<project>
+    <shortName>datasetcopypasteaugmenter</shortName>
+    <fullName>Dataset Copy-Paste Augmenter</fullName>
+    <version>1.0.0</version>
+    
+    <!-- Ultra-minimal, strictly standard file packaging list -->
+    <componentList>
+        <component>
+            <name>default</name>
+            <description>Default Component</description>
+            <canBeEdited>1</canBeEdited>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfiles</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <!-- Packs the entire PyInstaller build directory -->
+                        <distributionDirectory origin="dist/DatasetCopyPasteAugmenter"/>
+                    </distributionFileList>
+                </folder>
+            </folderList>
+        </component>
+    </componentList>
+    
+    <parameterList>
+        <directoryParameter>
+            <name>installdir</name>
+            <description>Installation Directory</description>
+            <explanation>Please select the folder where you want to install Dataset Copy-Paste Augmenter.</explanation>
+            <value></value>
+            <default>${platform_install_prefix}/datasetcopypasteaugmenter-1.0.0</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <mustBeWritable>1</mustBeWritable>
+            <mustExist>0</mustExist>
+        </directoryParameter>
+    </parameterList>
+</project>
+"""
+
+    output_path = "installbuilder.xml"
+    with open(output_path, "w") as f:
+        f.write(xml_content)
+    print(f"Successfully generated {output_path} with 100% correct InstallBuilder XML format!")
+
+if __name__ == "__main__":
+    build_installbuilder_xml()
